@@ -1,0 +1,137 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>add teachers</title>
+    <script src="https://code.jquery.com/jquery-3.6.3.js"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+
+    <style>
+        .navip{
+            width: 100%;
+            height: 50px;
+            background-color: rgb(71, 72, 72);
+            display: flex;
+            justify-content: center;
+        }
+        .navic{
+            margin-inline: 10px;
+            width: 200px;
+            height: 20px;
+            background-color: rgb(71, 72, 72);
+            border-radius: 20%;
+        }
+        .navic h4{
+            font-family: sans-serif;
+            color:white;
+            font-size: 13px;
+        }
+        .navic h4:hover{
+            font-size: 14px;
+        }
+        .navic a{
+            text-decoration: none;
+        }
+        .img{
+            width: 100%;
+            height: 100vh;
+        }
+        .navic h1{
+            font-family: sans-serif;
+            color:white;
+            font-size: 20px;
+        }
+        
+    </style>
+</head>
+<body style="margin: 0;">
+    <div class="navip">
+        <div class="navic"><a href="view_teacher.html"><h4>VIEW TEACHER</h4></a></div>
+        <div class="navic"><a href="home.html"><h4>ADMIN </h4></a></div>
+        <div class="navic"><a href="view_student.html"><h4>VIEW STUDENT</h4> </a></div>
+    </div>
+    <div class="navip">
+        <div class="navic"><h1>add teachers</h1></div>
+
+    </div>
+    <div style=" height: 90vh; width: 100%; display: flex; justify-content: center; ">
+        <div style="height: 70vh; width:30%; background-color: rgb(130, 133, 132);margin-top: 50px;border-radius: 10px; ">
+            <div style="margin-left:80px; margin-top: 40px;">
+                <form action="">
+                <input type="text" placeholder=" teacher name" id="t_name">
+                <br><br>
+                <input type="text" placeholder="age" id="t_age">
+                <br><br>
+                <input type="text" placeholder="gender" id="t_gender">
+                <br><br>
+                <input type="text" placeholder="subject" id="t_subject">
+                <br><br>
+                <input type="text" placeholder="phone" id="t_phone">
+                <br><br>
+                <input type="text" placeholder="email" id="t_email"><span>Your email will be your username</span>
+                <br><br>
+                <input type="text" placeholder="password" id="t_password">
+                <br><br>
+                <input type="button" name="" id="t_submit" name="dddd" value="submit">
+                <!-- <button type="submit" id="t_submit"> ADD </button> -->
+                <span id="t_span"></span>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+            $('#t_submit').click(function(){
+                var teah_data = {
+                    'name' :$('#t_name').val(), // here we use feild name in the model(columns in db) to store value from input field
+                    'age' : $('#t_age').val(),  // ie, name,age and others are database column names
+                    'gender' : $('#t_gender').val(),
+                    'subject' : $('#t_subject').val(),
+                    'phone' : $('#t_phone').val(),
+                    'email' : $('#t_email').val(),
+                    'password' : $('#t_password').val()
+            }
+                console.log(teah_data)
+
+                $.ajax({
+                    url:'http://127.0.0.1:8000/school_admin/add_teacher',
+
+                    data: teah_data,
+
+                    type:'POST',
+
+                    success: function(response){
+                            console.log(response.msg)
+                        $('#t_span').html(response.msg)
+                   
+                    }
+                })
+                // to reset input fields after save data
+                 $('#t_name').val('')
+                 $('#t_age').val('')
+                 $('#t_phone').val('')   
+                 $('#t_gender').val('')  
+                 $('#t_subject').val('')   
+                 $('#t_email').val('') 
+                 $('#t_address').val('')  
+                 $('#t_username').val('')  
+                 $('#t_password').val('')   
+
+
+
+
+
+
+            })
+
+        })
+    </script>
+
+
+</body>
+</html>
